@@ -3,7 +3,7 @@ export function connectionTarget(href, portable) {
   const page = new URL(href), socket = new URL('ws', new URL('.', page));
   socket.protocol = page.protocol === 'https:' ? 'wss:' : 'ws:';
   const local = ['127.0.0.1', 'localhost', '[::1]'].includes(page.hostname)||(page.origin==='https://cs2.duskrain.cn'&&page.pathname.startsWith('/__installed__/'));
-if (!local || !portable) return { socketURL: 'wss://cs2.duskrain.cn/ws', inviteBase: 'https://cs2.duskrain.cn/', offline: false };
+return { socketURL: null, inviteBase: null, offline: true };
   const remote = new URL(portable.socketURL);
   if (!['ws:', 'wss:'].includes(remote.protocol)) throw new Error('无效的本地客户端连接配置');
   const offline = portable.mode === 'offline';
